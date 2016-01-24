@@ -15,29 +15,39 @@
 
 ##메모이제이션
 메모이제이션을 설명하기 전에, 먼저 소스코드로 메모이제이션의 필요성을 예를들어 설명하고자 한다.
-<pre>
-`#include <iostream>`
+
+```C++
+#include <iostream>
+
 using namespace std;
+
 int getFibonacci(int targetNumber) {
     cout << "fibonacci(" << targetNumber << ")" << endl;
     if (targetNumber == 0) return 0;
     else if (targetNumber == 1) return 1;
     else return getFibonacci(targetNumber - 1) + getFibonacci(targetNumber - 2);
 }
+
 int main() {
     int targetNumber;
     cin >> targetNumber;
     cout << getFibonacci(targetNumber) << endl;
-}</pre>
+}
+
+```
+
 위 소스는 평범하게 재귀함수(Recursive Function)로 피보나치 수열을 출력하는 함수이다.
 
 재귀로 계속탐색하면서 어떤 값(targetNumber)으로 함수가 호출되었을때, 출력하고 마지막에 결과를 출력한다.
 
 **예제입력**
+
 <pre>
 7
 </pre>
+
 **예제출력**
+
 <pre>
 fibonacci(7)
 fibonacci(6)
@@ -96,9 +106,12 @@ fibonacci(1)
 
 
 **기존의 함수에 메모이제이션을 적용**
-<pre>
-`#include <iostream>`
+
+```C++
+#include <iostream>
+
 using namespace std;
+
 int getFibonacci(int targetNumber) {
     static int cacheSpace[100];
     if (cacheSpace[targetNumber] != 0)
@@ -109,19 +122,23 @@ int getFibonacci(int targetNumber) {
     int ret = getFibonacci(targetNumber - 1) + getFibonacci(targetNumber - 2);
     return cacheSpace[targetNumber] = ret;
 }
+
 int main() {
     int targetNumber;
     cin >> targetNumber;
     cout << getFibonacci(targetNumber) << endl;
 }
-</pre>
+```
 
 
 **예제입력**
+
 <pre>
 7
 </pre>
+
 **예제출력**
+
 <pre>
 fibonacci(7)
 fibonacci(6)
